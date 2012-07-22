@@ -9,6 +9,12 @@
   height: $size
   width: $size
 
+@mixin matrix($a, $b, $c, $d, $e, $f)
+  -moz-transform: matrix($a, $b, $c, $d, $e, $f)
+  -webkit-transform: matrix($a, $b, $c, $d, $e, $f)
+  -o-transform:  matrix($a, $b, $c, $d, $e, $f)
+  -ms-transform: matrix($a, $b, $c, $d, $e, $f)
+
 body
   background-color: black
   font: 16px "Helvetica Neue", sans-serif
@@ -27,3 +33,29 @@ body
   display: block
   height: 175px
   width: 130px
+
+
+.stan-walking-left-0
+  @include matrix(-1, 0, 0, 1, 0, 0)
+  @include stan-sprite(walking-right-0)
+
+.stan-walking-left-1
+  @include matrix(-1, 0, 0, 1, 0, 0)
+  @include stan-sprite(walking-right-1)
+
+.stan-walking-left-2
+  @include matrix(-1, 0, 0, 1, 0, 0)
+  @include stan-sprite(walking-right-2)
+
+.stan-walking-left-3
+  @include matrix(-1, 0, 0, 1, 0, 0)
+  @include stan-sprite(walking-right-3)
+
+.stan-walking-left-4
+  @include matrix(-1, 0, 0, 1, 0, 0)
+  @include stan-sprite(walking-right-4)
+
+.stan-walking-left-5
+  @include matrix(-1, 0, 0, 1, 0, 0)
+  @include stan-sprite(walking-right-5)
+

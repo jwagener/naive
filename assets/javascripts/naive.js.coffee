@@ -11,9 +11,9 @@ class NAIVE.Game
     @actor = new NAIVE.Actor()
     document.title = game.title
     console.log("hi", game)
-    window.setInterval @runLoop, 250
+    window.setInterval @runLoop, 125
 
-    @initializeDebug()
+    #@initializeDebug()
 
 
   initializeDebug: ->
@@ -54,10 +54,11 @@ class NAIVE.Actor
   width: 130
   height: 175
   position: null
-
+  frame: 0
   update: ->
-    $(".actor").toggleClass("stan-waiting-2")
-    @position.x += 5
+    @frame += 1
+    @updateAnimation()
+    @position.x += 10
     @setPosition()
 
   setPosition: ->
@@ -68,6 +69,20 @@ class NAIVE.Actor
   constructor: ->
     @e = $(".actor")
     @position = new NAIVE.P(300, 200)
+
+  updateAnimation: ->
+    baseAnimation = "stan-walking-right"
+    animationFrames = 6
+    toBeRemoved = []
+    toBeAdded   = []
+    for i in [0..animationFrames]
+      animationFrameName = "#{baseAnimation}-#{i}"
+      if @frame % animationFrames == i
+        toBeAdded.push animationFrameName
+      else
+        toBeRemoved.push animationFrameName
+    @e.removeClass(toBeRemoved.join(" ")).addClass(toBeAdded.join(" "))
+
 
 window.NAIVE.P = (x, y) ->
   @x = x
