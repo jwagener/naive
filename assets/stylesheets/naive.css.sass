@@ -1,8 +1,9 @@
-//= require ss-standard
-//= require ss-social
 //= require_self
 
 @import "compass/css3"
+@import "stan/*.png"
+
+@include all-stan-sprites
 
 @mixin square($size)
   height: $size
@@ -24,14 +25,5 @@ body
 .actor
   position: relative
   display: block
-  height: 183px
-  width: 100px
-  background-image: url(/images/nighthawks/stan.png)
-  top: 400px
-  left: 200px
-  background-position: 297px -220px
-
-
-
-.frame1 .actor
-  background-position: 162px -220px
+  height: 175px
+  width: 130px

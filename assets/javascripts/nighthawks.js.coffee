@@ -5,7 +5,13 @@ window.Nighthawks =
     front: 
       points: [
         new NAIVE.P(3, 599)
-        new NAIVE.P(9, 525)
-        new NAIVE.P(525, 519)
-        new NAIVE.P(789, 597)
+        new NAIVE.P(9, 428)
+        new NAIVE.P(840, 597)
+      ]
+
+    back: 
+      points: [
+        new NAIVE.P(9, 428)
+        new NAIVE.P(327, 408)
+        new NAIVE.P(336, 484)
       ]
