@@ -1,6 +1,6 @@
 class NAIVE.WalkArea extends NAIVE.Area
-  constructor: ->
-    super arguments
+  constructor: (options) ->
+    super(options)
     @walkAreaConnections = []
 
   onClick: (point, game, actor) ->

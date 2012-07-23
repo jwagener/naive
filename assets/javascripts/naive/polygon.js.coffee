@@ -1,6 +1,6 @@
 class NAIVE.Polygon
-  points: []
   constructor: (options) ->
+    @points = []
     @points = options.points
 
   isPointWithin: (point) ->
