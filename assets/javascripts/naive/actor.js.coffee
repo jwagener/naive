@@ -28,7 +28,7 @@ class NAIVE.Actor
     @e.css
       left: @position.x - (@width/2)
       top: @position.y - @height
-
+      "z-index": @zIndex || 0
     scale = @position.y / 450
     #@e.css
     #  "-webkit-transform": "scale(#{scale}, #{scale})"
@@ -41,8 +41,9 @@ class NAIVE.Actor
     # assumes that point is in a walkArea
     walkArea = game.findAreaForPoint(point)
     unless @currentWalkArea?
-      console.log "lost track of the currentWalkArea, guessing a new one"
-      @currentWalkArea = walkArea  
+      console.log "lost track of the currentWalkArea, applying a new one"
+      walkArea.onEntry(@)
+
     path = @currentWalkArea.findPath(walkArea)
 
     if path?

@@ -1,5 +1,6 @@
 class Nighthawks.FrontWalkArea extends NAIVE.WalkArea
   name: "front"
+  zIndex: 250
   points: [
     new NAIVE.P(3, 599)
     new NAIVE.P(9, 428)

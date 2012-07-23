@@ -6,3 +6,6 @@ class Nighthawks.BarEntryWalkArea extends NAIVE.WalkArea
     new NAIVE.P(503, 470)
     new NAIVE.P(397, 484)
   ]
+  zIndex: 150
+  onEntry: (actor) ->
+    super(actor)

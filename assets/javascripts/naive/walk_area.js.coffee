@@ -1,7 +1,8 @@
 class NAIVE.WalkArea extends NAIVE.Area
   constructor: (options={}) ->
     super(options)
-    @walkAreaConnections = []
+    @zIndex ||= 100
+    @walkAreaConnections ||= []
 
   onClick: (point, game, actor) ->
     actor.goTo(point)
@@ -13,6 +14,7 @@ class NAIVE.WalkArea extends NAIVE.Area
   onEntry: (actor) ->
     console.log("onEntry", actor)
     actor.currentWalkArea = @
+    actor.zIndex = @zIndex
 
   findPath: (toWalkarea, checkedWalkAreas=[], currentPath=[]) ->
     checkedWalkAreas.push @
