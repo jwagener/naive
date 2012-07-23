@@ -25,8 +25,32 @@ body
   width: 800px
   height: 600px
   margin: 100px auto
-  background-image: url(/images/nighthawks/nighthawks.png)
   overflow: hidden
+  z-index: 0
+
+.layer1, .layer2, .layer3, .layer4, .layer5,
+  width: 800px
+  height: 600px
+  position: absolute
+  top: 0
+  left: 0
+
+.canvas
+  background-image: url(/assets/background/full.png)
+
+.layer1
+  background-image: url(/assets/background/outterwindow.png)
+  z-index: 100
+
+.layer2
+  background-image: url(/assets/background/window.png)
+  z-index: 200
+
+.layer3
+  background-image: url(/assets/background/bar.png)
+  z-index: 300
+
+
 
 .actor
   position: absolute

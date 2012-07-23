@@ -22,6 +22,11 @@ class NAIVE.Actor
       left: @position.x - (@width/2)
       top: @position.y - @height
 
+    scale = @position.y / 450
+    @e.css
+      "-webkit-transform": "scale(#{scale}, #{scale})"
+
+
   constructor: ->
     @e = $(".actor")
     @target  = new NAIVE.P(250, 550)
