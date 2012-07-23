@@ -1,13 +1,18 @@
 class NAIVE.WalkArea extends NAIVE.Area
-  constructor: (options) ->
+  constructor: (options={}) ->
     super(options)
     @walkAreaConnections = []
 
   onClick: (point, game, actor) ->
-    if @polygon.isPointWithin(actor.position)
-      actor.target = point
-    else
-      console.log("find path fucker")
+    actor.goTo(point)
+    #if @polygon.isPointWithin(actor.position)
+    #  actor.target = point
+    #else
+    #  console.log("find path fucker")
+
+  onEntry: (actor) ->
+    console.log("onEntry", actor)
+    actor.currentWalkArea = @
 
   findPath: (toWalkarea, checkedWalkAreas=[], currentPath=[]) ->
     checkedWalkAreas.push @

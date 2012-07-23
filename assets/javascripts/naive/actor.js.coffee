@@ -1,17 +1,24 @@
 class NAIVE.Actor
-  velocity: 10
+  velocity: 20
   target: null
+  onTargetArrived: null
   width: 130
   height: 175
   position: null
   frame: 0
+  currentWalkArea: null
+
   update: ->
     @frame += 1
     if @target?
       if @position.distanceTo(@target) < @velocity
         @position = @target
         @target = null
-        console.log "arrived"
+
+        if @onTargetArrived?
+          callback = @onTargetArrived
+          @onTargetArrived = null
+          callback()
       else
         @position = @position.pointBetween(@target, @velocity)
     @updateAnimation()
@@ -23,14 +30,45 @@ class NAIVE.Actor
       top: @position.y - @height
 
     scale = @position.y / 450
-    @e.css
-      "-webkit-transform": "scale(#{scale}, #{scale})"
+    #@e.css
+    #  "-webkit-transform": "scale(#{scale}, #{scale})"
 
+  setTarget: (point, callback) ->
+    @target = point
+    @onTargetArrived = callback
+
+  goTo: (point, callback) ->
+    # assumes that point is in a walkArea
+    walkArea = game.findAreaForPoint(point)
+    unless @currentWalkArea?
+      console.log "lost track of the currentWalkArea, guessing a new one"
+      @currentWalkArea = walkArea  
+    path = @currentWalkArea.findPath(walkArea)
+
+    if path?
+      if path.length == 0
+        @setTarget point, callback
+      else
+        walkPath = (path, i) =>
+          console.log "walkPath segment", i, path
+          if connection = path[i]
+            @setTarget connection.point, =>
+              console.log "walkPath segment point reached", connection.walkArea
+              connection.walkArea.onEntry(@)
+              walkPath path, i + 1
+          else
+            console.log "Going to the original destination"
+            @setTarget point, callback
+        walkPath(path, 0)
+
+    else
+      @say "No way I can get there"
+
+  say: (message) ->
+    console.log message
 
   constructor: ->
     @e = $(".actor")
-    @target  = new NAIVE.P(250, 550)
-    @position = new NAIVE.P(-150, 550)
 
   updateAnimation: ->
     if @target?

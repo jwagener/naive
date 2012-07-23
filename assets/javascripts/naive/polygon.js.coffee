@@ -9,9 +9,10 @@ class NAIVE.Polygon
   toCanvas: (ctx) ->
     ctx.fillStyle = 'rgba(200,0,0, 0.5)'
     ctx.beginPath()
-    firstPoint = @points.shift()
+    points = $.merge([], @points)
+    firstPoint = points.shift()
     ctx.moveTo(firstPoint.x, firstPoint.y)
-    for point in @points
+    for point in points
       ctx.lineTo(point.x, point.y)
     ctx.closePath()
     ctx.fill()

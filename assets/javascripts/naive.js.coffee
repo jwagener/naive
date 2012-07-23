@@ -9,13 +9,18 @@ class NAIVE.Game
   constructor: (options) ->
     @$e = $(".canvas")
     @actor = new NAIVE.Actor()
+    @actor.position = new NAIVE.P(-150, 550)
+    @walkAreas = options.walkAreas
     document.title = @title
     @$e.live "click", @onClick
-    @loopInterval = window.setInterval @runLoop, 125
     @initializeDebug()
+    @startLoop()
 
   runLoop: () =>
     @actor.update()
+
+  startLoop: ->
+    @loopInterval = window.setInterval @runLoop, 125
 
   stopLoop: ->
     window.clearInterval @loopInterval
@@ -23,12 +28,11 @@ class NAIVE.Game
   onClick: (e) =>
     e.preventDefault()
     p = new NAIVE.P(e.offsetX, e.offsetY)
+    console.log p.toString()
 
+    console.log(p, @findAreaForPoint(p) )
     if area = @findAreaForPoint(p)
       area.onClick(p, @game, @actor)
-      console.log("Found area", area)
-    #game.actor.target = p
-    console.log "Click on: " + p.toString()
 
   findAreaForPoint: (point) ->
     foundArea = null
@@ -52,6 +56,3 @@ class NAIVE.Game
     for area in @walkAreas
       console.log(area)
       area.polygon.toCanvas(@debugCanvas)
-
-$ ->
-  window.game = new Nighthawks()

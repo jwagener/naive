@@ -1,7 +1,7 @@
 class NAIVE.Area
   constructor: (options) ->
     @polygon = options.polygon if options.polygon?
-    if options.points
+    if points = (options.points || @points)
       @polygon = new NAIVE.Polygon
-        points: options.points
+        points: points
 

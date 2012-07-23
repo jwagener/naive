@@ -53,14 +53,15 @@ body
   background-image: url(/assets/background/bar.png)
   z-index: 300
 
-
+.debugCanvas
+  z-index: 1000
 
 .actor
   position: absolute
   display: block
   height: 175px
   width: 130px
-
+  z-index: 500
 
 .stan-walking-left-0
   @include matrix(-1, 0, 0, 1, 0, 0)
