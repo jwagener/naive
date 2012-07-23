@@ -6,14 +6,10 @@
 window.NAIVE = {}
 class NAIVE.Game
   frame: 0
-  constructor: (game) ->
-    @game = game
-
+  constructor: (options) ->
     @actor = new NAIVE.Actor()
-    document.title = game.title
-    console.log("hi", game)
+    document.title = @title
     @loopInterval = window.setInterval @runLoop, 125
-
     @initializeDebug()
 
   runLoop: () =>
@@ -23,28 +19,7 @@ class NAIVE.Game
     window.clearInterval @loopInterval
 
   initializeDebug: ->
-    window.drawPolygon = (c, points) ->
-      c.fillStyle = 'rgba(200,0,0, 0.5)'
-      c.beginPath()
-      firstPoint = points.shift()
-      c.moveTo(firstPoint.x, firstPoint.y)
-      for point in points
-        c.lineTo(point.x, point.y)
-      c.closePath();
-      c.fill();
-
-
-    canvas = $(".canvas")
-    c = $("<canvas />").appendTo(canvas)
-    c.css
-      position: "absolute"
-      top: 0
-    c.attr("width", canvas.width())
-    c.attr("height", canvas.height())
-
-    window.ctx = c[0].getContext("2d")
-    #drawPolygon(ctx, @game.walkareas.front.points)
-    #drawPolygon(ctx, @game.walkareas.back.points)
+    @debugCanvas = @setupDebugCanvas()
 
     $(".canvas").live "click", (e) ->
       e.preventDefault()
@@ -52,5 +27,17 @@ class NAIVE.Game
       game.actor.target = p
       console.log "Debug: #{p.toString()}"
 
+  setupDebugCanvas: ->
+    canvas = $(".canvas")
+    c = $("<canvas class='debugCanvas'/>").appendTo(canvas)
+    c.attr("width", canvas.width())
+    c.attr("height", canvas.height())
+    window.ctx = c[0].getContext("2d")
+
+  debugAreas: ->
+    for area in @walkAreas
+      console.log(area)
+      area.polygon.toCanvas(@debugCanvas)
+
 $ ->
-  window.game = new NAIVE.Game(Nighthawks)
+  window.game = new Nighthawks()

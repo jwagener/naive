@@ -1,17 +1,20 @@
-window.Nighthawks =
+class window.Nighthawks extends NAIVE.Game
   title: "Nighthawks"
   backgrounds: ["/images/nighthawks.png"]
-  walkareas:
-    front: 
+  walkAreas: [
+    new NAIVE.WalkArea
+      name: "front"
       points: [
         new NAIVE.P(3, 599)
         new NAIVE.P(9, 428)
         new NAIVE.P(840, 597)
       ]
 
-    back: 
+    new NAIVE.WalkArea
+      name: "front"
       points: [
         new NAIVE.P(9, 428)
         new NAIVE.P(327, 408)
         new NAIVE.P(336, 484)
       ]
+  ]
