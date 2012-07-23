@@ -7,8 +7,10 @@ window.NAIVE = {}
 class NAIVE.Game
   frame: 0
   constructor: (options) ->
+    @$e = $(".canvas")
     @actor = new NAIVE.Actor()
     document.title = @title
+    @$e.live "click", @onClick
     @loopInterval = window.setInterval @runLoop, 125
     @initializeDebug()
 
@@ -18,14 +20,26 @@ class NAIVE.Game
   stopLoop: ->
     window.clearInterval @loopInterval
 
+  onClick: (e) =>
+    e.preventDefault()
+    p = new NAIVE.P(e.offsetX, e.offsetY)
+
+    if area = @findAreaForPoint(p)
+      area.onClick(p, @game, @actor)
+      console.log("Found area", area)
+    #game.actor.target = p
+    console.log "Click on: " + p.toString()
+
+  findAreaForPoint: (point) ->
+    foundArea = null
+    for areaCollection in [@walkAreas]
+      for area in areaCollection
+        if area.polygon.isPointWithin(point)
+          foundArea = area
+    foundArea
+
   initializeDebug: ->
     @debugCanvas = @setupDebugCanvas()
-
-    $(".canvas").live "click", (e) ->
-      e.preventDefault()
-      p = new NAIVE.P(e.offsetX, e.offsetY)
-      game.actor.target = p
-      console.log "Debug: #{p.toString()}"
 
   setupDebugCanvas: ->
     canvas = $(".canvas")
