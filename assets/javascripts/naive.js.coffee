@@ -12,7 +12,10 @@ class NAIVE.Game
     @actor.position = new NAIVE.P(-150, 550)
     @walkAreas = options.walkAreas
     document.title = @title
-    @$e.live "click", @onClick
+    @$e.bind "click", @onClick
+    @$e.live "touchstart", (e) ->
+      console.log(e, e.offsetX)
+      game.onClick(e)
     @initializeDebug()
     @startLoop()
 
