@@ -13,7 +13,7 @@ class NAIVE.Game
     console.log("hi", game)
     window.setInterval @runLoop, 125
 
-    #@initializeDebug()
+    @initializeDebug()
 
 
   initializeDebug: ->
@@ -37,38 +37,41 @@ class NAIVE.Game
     c.attr("height", canvas.height())
 
     window.ctx = c[0].getContext("2d")
-    drawPolygon(ctx, @game.walkareas.front.points)
-    drawPolygon(ctx, @game.walkareas.back.points)
+    #drawPolygon(ctx, @game.walkareas.front.points)
+    #drawPolygon(ctx, @game.walkareas.back.points)
 
     $(".canvas").live "click", (e) ->
       e.preventDefault()
-      x = e.offsetX
-      y = e.offsetY
-      console.log "Debug: #{x}, #{y}"
+      p = new NAIVE.P(e.offsetX, e.offsetY)
+      game.actor.target = p
+      console.log "Debug: #{p.toString()}"
 
   runLoop: () =>
     @actor.update()
 
 class NAIVE.Actor
   velocity: 10
+  target: null
   width: 130
   height: 175
   position: null
   frame: 0
   update: ->
     @frame += 1
+
+    @position = @position.pointBetween(@target, @velocity)
     @updateAnimation()
-    @position.x += 10
     @setPosition()
 
   setPosition: ->
     @e.css
       left: @position.x - (@width/2)
-      top: @position.y + @height
+      top: @position.y - @height
 
   constructor: ->
     @e = $(".actor")
-    @position = new NAIVE.P(300, 200)
+    @target  = new NAIVE.P(400, 400)
+    @position = new NAIVE.P(0, 0)
 
   updateAnimation: ->
     baseAnimation = "stan-walking-right"
@@ -83,10 +86,35 @@ class NAIVE.Actor
         toBeRemoved.push animationFrameName
     @e.removeClass(toBeRemoved.join(" ")).addClass(toBeAdded.join(" "))
 
+class NAIVE.P
+  toString: -> "#{@x}, #{@y}"
+  deg2rad: (d) -> d * Math.PI / 180
+  rad2deg: (r) -> r / Math.PI * 180
 
-window.NAIVE.P = (x, y) ->
-  @x = x
-  @y = y
+  pointBetween: (point, distance) ->
+    deg = Math.PI / 180.0
+    angle = @angleFor(point)
+    r = @deg2rad(angle - 90)
+    x = Math.round(@x + distance * Math.cos(r))
+    y = Math.round(@y + distance * Math.sin(r))
+    newPoint = new NAIVE.P(x, y)
+
+  distanceTo: (otherPoint) ->
+    x = @x
+    y = @y
+    x0 = otherPoint.x
+    y0 = otherPoint.y
+    Math.sqrt((x -= x0) * x + (y -= y0) * y);
+
+  angleFor: (otherPoint) ->
+    @coordsToAngle(@x, @y, otherPoint.x, otherPoint.y)
+
+  coordsToAngle: (x1, y1, x2, y2) ->
+    (@rad2deg(Math.atan2(x2 - x1, y1 - y2)) + 360) % 360
+
+  constructor: (x, y) ->
+    @x = x
+    @y = y
 
 $ ->
-  game = new NAIVE.Game(Nighthawks)
+  window.game = new NAIVE.Game(Nighthawks)
