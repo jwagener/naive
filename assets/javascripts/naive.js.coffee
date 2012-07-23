@@ -12,12 +12,15 @@ class NAIVE.Game
     @actor = new NAIVE.Actor()
     document.title = game.title
     console.log("hi", game)
-    window.setInterval @runLoop, 125
+    @loopInterval = window.setInterval @runLoop, 125
 
     @initializeDebug()
 
   runLoop: () =>
     @actor.update()
+
+  stopLoop: ->
+    window.clearInterval @loopInterval
 
   initializeDebug: ->
     window.drawPolygon = (c, points) ->
