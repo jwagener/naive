@@ -6,10 +6,6 @@ class NAIVE.WalkArea extends NAIVE.Area
 
   onClick: (point, game, actor) ->
     actor.goTo(point)
-    #if @polygon.isPointWithin(actor.position)
-    #  actor.target = point
-    #else
-    #  console.log("find path fucker")
 
   onEntry: (actor) ->
     console.log("onEntry", actor)

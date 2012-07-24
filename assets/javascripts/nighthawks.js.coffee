@@ -6,7 +6,8 @@
 
 class window.Nighthawks extends NAIVE.Game
   title: "Nighthawks"
-  backgrounds: ["/images/nighthawks.png"]
+  width: 1097
+  height: 600
 
 $ ->
   window.back     = new Nighthawks.BackWalkArea()
@@ -16,7 +17,7 @@ $ ->
   window.barEntry = new Nighthawks.BarEntryWalkArea()
   
   NAIVE.WalkArea.connect(new NAIVE.P(187, 463), back, front)
-  NAIVE.WalkArea.connect(new NAIVE.P(1100, 580), front, barDoor)
+  NAIVE.WalkArea.connect(new NAIVE.P(1100, 610), front, barDoor)
   NAIVE.WalkArea.connect(new NAIVE.P(1100, 500), barDoor, barEntry)
   NAIVE.WalkArea.connect(new NAIVE.P(475, 455), barEntry, barBack)
 

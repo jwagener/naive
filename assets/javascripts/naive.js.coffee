@@ -30,9 +30,12 @@ class NAIVE.Game
     p = new NAIVE.P(e.offsetX, e.offsetY)
     console.log p.toString(), e
 
-    console.log(p, @findAreaForPoint(p) )
     if area = @findAreaForPoint(p)
-      area.onClick(p, @game, @actor)
+      @actor.goTo(p)
+      #area.onClick(p, @game, @actor)
+    else
+      closestPoint = @findClosestPointInWalkingAreaForPoint(p)
+      @actor.goTo(closestPoint)
 
   findAreaForPoint: (point) ->
     foundArea = null
@@ -41,6 +44,14 @@ class NAIVE.Game
         if area.polygon.isPointWithin(point)
           foundArea = area
     foundArea
+
+  findClosestPointInWalkingAreaForPoint: (point) ->
+    for y in [(point.y)..@height]
+      currentPoint = new NAIVE.P(point.x, y)
+      for area in @walkAreas
+        if area.polygon.isPointWithin(currentPoint)
+          return currentPoint
+    null
 
   initializeDebug: ->
     @debugCanvas = @setupDebugCanvas()
