@@ -29,9 +29,10 @@ class NAIVE.Actor
       left: @position.x - (@width/2)
       top: @position.y - @height
       "z-index": @zIndex || 0
-    scale = @position.y / 450
-    #@e.css
-    #  "-webkit-transform": "scale(#{scale}, #{scale})"
+    #scale = @position.y / 450
+    scale = @currentWalkArea.calculateScale(@position)
+    @e.css
+      "-webkit-transform": "scale(#{scale}, #{scale})"
 
   setTarget: (point, callback) ->
     @target = point

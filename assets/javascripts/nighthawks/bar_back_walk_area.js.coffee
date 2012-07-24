@@ -7,3 +7,7 @@ class Nighthawks.BarBackWalkArea extends NAIVE.WalkArea
     new NAIVE.P(888, 435)
   ]
   zIndex: 50
+  minY: 435
+  maxY: 570
+  minDepth: 0.9
+  maxDepth: 0.9

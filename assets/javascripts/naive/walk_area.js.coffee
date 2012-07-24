@@ -30,6 +30,13 @@ class NAIVE.WalkArea extends NAIVE.Area
           return path
     null
 
+  calculateScale: (point) ->
+    # hack. just uses the y position to figure out the scale.
+    heightRange = @maxY - @minY
+    relativeHeight  = point.y - @minY
+    depthRange = @maxDepth - @minDepth
+    ((relativeHeight / heightRange / 1.0) * depthRange) + @minDepth
+
 NAIVE.WalkArea.connect = (point, walkArea1, walkArea2) ->
   walkArea1.walkAreaConnections.push
     walkArea: walkArea2
