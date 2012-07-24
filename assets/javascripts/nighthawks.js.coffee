@@ -25,4 +25,5 @@ $ ->
     walkAreas: [front, back, barDoor, barEntry, barBack]
 
   game.actor.goTo new NAIVE.P(250, 550), ->
-    game.actor.say "Hi, I'm Ned and I need a trink and a cigarette!"
+    game.actor.say "Howdie, I'm Stan!", ->
+      game.actor.say "I need a drink and a cigarette!"

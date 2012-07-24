@@ -72,8 +72,12 @@ class NAIVE.Actor
     else
       @say "No way I can get there"
 
-  say: (message) ->
-    console.log message
+  say: (message, callback) ->
+    @e.find(".text").text(message)
+    window.setTimeout (=>
+      @e.find(".text").text('')
+      callback() if callback?
+    ), 2000
 
   constructor: ->
     @e = $(".actor")
