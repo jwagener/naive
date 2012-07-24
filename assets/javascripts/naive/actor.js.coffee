@@ -7,9 +7,11 @@ class NAIVE.Actor
   position: null
   frame: 0
   currentWalkArea: null
+  cssTransforms: []
 
   update: ->
     @frame += 1
+    @cssTransforms = []
     if @target?
       if @position.distanceTo(@target) < @velocity
         @position = @target
@@ -31,8 +33,12 @@ class NAIVE.Actor
       "z-index": @zIndex || 0
     #scale = @position.y / 450
     scale = @currentWalkArea.calculateScale(@position)
+    @cssTransforms.push "scale(#{scale}, #{scale})"
     @e.css
-      "-webkit-transform": "scale(#{scale}, #{scale})"
+      "-webkit-transform": @cssTransforms.join(" ")
+      "-moz-transform": @cssTransforms.join(" ")
+      "-ms-transform": @cssTransforms.join(" ")
+      "transform": @cssTransforms.join(" ")
 
   setTarget: (point, callback) ->
     @target = point
@@ -85,7 +91,8 @@ class NAIVE.Actor
         animation = "stan-walking-front"
         animationFrames = 6
       else if angle > 225 && angle < 315
-        animation = "stan-walking-left"
+        animation = "stan-walking-right"
+        @cssTransforms.push "scale(-1, 1)"
         animationFrames = 6
     else
       animation = "stan-waiting"
