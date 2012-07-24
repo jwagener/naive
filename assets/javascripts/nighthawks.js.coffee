@@ -16,10 +16,9 @@ $ ->
   window.barEntry = new Nighthawks.BarEntryWalkArea()
   
   NAIVE.WalkArea.connect(new NAIVE.P(187, 463), back, front)
-  NAIVE.WalkArea.connect(new NAIVE.P(1100, 600), front, barDoor)
-  NAIVE.WalkArea.connect(new NAIVE.P(1100, 600), barDoor, barEntry)
+  NAIVE.WalkArea.connect(new NAIVE.P(1100, 580), front, barDoor)
+  NAIVE.WalkArea.connect(new NAIVE.P(1100, 500), barDoor, barEntry)
   NAIVE.WalkArea.connect(new NAIVE.P(475, 455), barEntry, barBack)
-
 
   window.game = new Nighthawks
     walkAreas: [front, back, barDoor, barEntry, barBack]
