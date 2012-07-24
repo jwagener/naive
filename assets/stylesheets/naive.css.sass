@@ -28,12 +28,12 @@ body
   overflow: hidden
   z-index: 0
 
-.canvas, .layer1, .layer2, .layer3, .layer4, .layer5,
+.canvas, .layer1, .layer2, .layer3, .layer4, .layer5, .click-layer
   width: 1050px
   height: 600px
 
 
-.layer1, .layer2, .layer3, .layer4, .layer5,
+.layer1, .layer2, .layer3, .layer4, .layer5, .click-layer
   position: absolute
   top: 0
   left: 0
@@ -50,6 +50,8 @@ body
   background-image: url(/assets/background/outterwindow.png)
   z-index: 200
 
+.click-layer
+  z-index: 1500
 
 .debugCanvas
   z-index: 1000

@@ -12,10 +12,7 @@ class NAIVE.Game
     @actor.position = new NAIVE.P(-150, 550)
     @walkAreas = options.walkAreas
     document.title = @title
-    @$e.bind "click", @onClick
-    @$e.live "touchstart", (e) ->
-      console.log(e, e.offsetX)
-      game.onClick(e)
+    @$e.find(".click-layer").bind "click", @onClick
     @initializeDebug()
     @startLoop()
 
@@ -31,7 +28,7 @@ class NAIVE.Game
   onClick: (e) =>
     e.preventDefault()
     p = new NAIVE.P(e.offsetX, e.offsetY)
-    console.log p.toString()
+    console.log p.toString(), e
 
     console.log(p, @findAreaForPoint(p) )
     if area = @findAreaForPoint(p)
