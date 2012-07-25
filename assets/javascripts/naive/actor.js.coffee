@@ -77,7 +77,7 @@ class NAIVE.Actor
     @onTargetArrived = null
 
   say: (message, callback) ->
-    textPosition = new NAIVE.P @position.x + @width / 2, @position.y - @height - 35
+    textPosition = new NAIVE.P @position.x, @position.y - @height - 70
     game.showMessage(textPosition, message, "#f06", callback)
 
   constructor: ->

@@ -11,6 +11,5 @@ class NAIVE.ItemArea extends NAIVE.Area
 
   say: (message, callback) ->
     point = @polygon.topCenterPoint()
-    point.y -= 50
-    point.x -= message.length * 10
+    point.y -= 70
     game.showMessage(point, message, @sayColor, callback)

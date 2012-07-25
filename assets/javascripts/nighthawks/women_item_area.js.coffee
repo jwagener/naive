@@ -7,7 +7,7 @@ window.womenItemArea = new NAIVE.ItemArea
   ]
 
   closePoint: new NAIVE.P(873, 436)
-
+  sayColor: "red"
   onClick: (p, game) ->
     game.actor.goCloseTo @closePoint, =>
       @say "Hey boy..", =>

@@ -7,7 +7,7 @@ window.barmanItemArea = new NAIVE.ItemArea
   ]
 
   closePoint: new NAIVE.P(744, 489)
-
+  sayColor: "white"
   onClick: (p, game) ->
     game.actor.goCloseTo @closePoint, =>
       @say "Another round?", =>

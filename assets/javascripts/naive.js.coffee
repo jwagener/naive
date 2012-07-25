@@ -29,7 +29,7 @@ class NAIVE.Game
   onClick: (e) =>
     e.preventDefault()
     p = new NAIVE.P(e.offsetX, e.offsetY)
-
+    console.log p.toString()
     if area = @findAreaForPoint(p)
       area.onClick(p, @, @actor)
     else

@@ -6,6 +6,7 @@ window.sleepingManItemArea = new NAIVE.ItemArea
   ]
 
   closePoint: new NAIVE.P(534, 446)
+  sayColor: "grey"
 
   onClick: (p, game) ->
     game.actor.goCloseTo @closePoint, =>

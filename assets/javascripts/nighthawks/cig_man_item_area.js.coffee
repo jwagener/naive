@@ -6,6 +6,7 @@ window.cigManItemArea = new NAIVE.ItemArea
   ]
 
   closePoint: new NAIVE.P(706, 408)
+  sayColor: "blue"
 
   onClick: (p, game) ->
     game.actor.goCloseTo @closePoint, =>

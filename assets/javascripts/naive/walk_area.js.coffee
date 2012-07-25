@@ -8,7 +8,6 @@ class NAIVE.WalkArea extends NAIVE.Area
     actor.goTo(point)
 
   onEntry: (actor) ->
-    console.log("onEntry", actor)
     actor.currentWalkArea = @
     actor.zIndex = @zIndex
 
