@@ -28,4 +28,4 @@ $ ->
 
   game.actor.goTo new NAIVE.P(250, 550), ->
     game.actor.say "Howdy, I'm Stan!", ->
-      game.actor.say "And I need a drink and a cigarette!"
+      game.actor.say "And I need a drink!"

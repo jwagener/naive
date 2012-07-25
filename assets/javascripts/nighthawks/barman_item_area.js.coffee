@@ -6,13 +6,14 @@ window.barmanItemArea = new NAIVE.ItemArea
     new NAIVE.P(910, 324)
   ]
 
+  closePoint: new NAIVE.P(744, 489)
+
   onClick: (p, game) ->
-    game.actor.goCloseTo p, ->
-      game.actor.say "Bla. Get out!"
+    game.actor.goCloseTo @closePoint, =>
+      @say "Another round?", =>
+        game.actor.say "Yeah!", =>
+          @say "Here you go...", =>
+            game.actor.say "Thanks, barman!"
 
 $ ->
   game.itemAreas.push barmanItemArea
-
-
-
-

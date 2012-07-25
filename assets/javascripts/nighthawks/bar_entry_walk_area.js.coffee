@@ -19,14 +19,16 @@ class Nighthawks.BarEntryWalkArea extends NAIVE.WalkArea
     else if game.state.sawBarman
       game.state.convincedBarman = true
       barmanItemArea.say "What do you want? We are still closed!", ->
-        actor.say("But I really need a drink!")
+        actor.say "But I really need a drink!", ->
+          barmanItemArea.say "Well, just this time. Here you go."
+      super(actor)
+
+      game.actor.goCloseTo barmanItemArea.closePoint
     else
       game.state.sawBarman = true
       barmanItemArea.say("We're closed already. Get out!")
       window.setTimeout (->
         p = new NAIVE.P(640, 568)
-        console.log("return")
         actor.goTo p, ->
-          console.log("returned")
           actor.say("Well, it doesn't seem to be closed..")
       ), 800

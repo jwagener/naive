@@ -2,6 +2,7 @@ class NAIVE.ItemArea extends NAIVE.Area
   constructor: (options) ->
     super(options)
     @onClick = options.onClick if options.onClick
+    @closePoint = options.closePoint
     @sayColor = options.sayColor || "white"
 
   onClick: (p, game) ->
