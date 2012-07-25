@@ -1,9 +1,6 @@
 //= require_self
 //= require_tree ./nighthawks
 
-
-
-
 class window.Nighthawks extends NAIVE.Game
   title: "Nighthawks"
   width: 1097
@@ -12,6 +9,13 @@ class window.Nighthawks extends NAIVE.Game
     sawBarman: false
 
 $ ->
+  SC.initialize
+    client_id: "YOUR_CLIENT_ID"
+
+  SC.stream "/tracks/41512951",
+    autoPlay: true
+    loops: 300
+
   window.back     = new Nighthawks.BackWalkArea()
   window.front    = new Nighthawks.FrontWalkArea()
   window.barBack  = new Nighthawks.BarBackWalkArea()
