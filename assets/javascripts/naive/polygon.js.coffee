@@ -43,3 +43,16 @@ class NAIVE.Polygon
       mAB = (b.y - a.y) / (b.x - a.x)
       mAP = (p.y - a.y) / (p.x - a.x)
       mAP > mAB
+
+  topCenterPoint: ->
+    y = @points[0].y
+    maxX = @points[0].x
+    minX =  @points[0].x
+    for point in @points
+      y = Math.min(y, point.y)
+      maxX = Math.max(maxX, point.x)
+      minX = Math.min(minX, point.x)
+    x = minX + (maxX - minX) / 2
+    new NAIVE.P(x, y)
+
+

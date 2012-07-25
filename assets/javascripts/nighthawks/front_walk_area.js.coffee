@@ -3,8 +3,8 @@ class Nighthawks.FrontWalkArea extends NAIVE.WalkArea
   zIndex: 250
   minY: 428
   maxY: 599
-  minDepth: 0.9
-  maxDepth: 1.3
+  minDepth: 1.0
+  maxDepth: 1.4
 
   points: [
     new NAIVE.P(3, 599)

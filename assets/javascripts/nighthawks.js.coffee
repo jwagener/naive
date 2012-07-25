@@ -8,6 +8,8 @@ class window.Nighthawks extends NAIVE.Game
   title: "Nighthawks"
   width: 1097
   height: 600
+  state:
+    sawBarman: false
 
 $ ->
   window.back     = new Nighthawks.BackWalkArea()
@@ -25,5 +27,5 @@ $ ->
     walkAreas: [front, back, barDoor, barEntry, barBack]
 
   game.actor.goTo new NAIVE.P(250, 550), ->
-    game.actor.say "Howdie, I'm Stan!", ->
-      game.actor.say "I need a drink and a cigarette!"
+    game.actor.say "Howdy, I'm Stan!", ->
+      game.actor.say "And I need a drink and a cigarette!"

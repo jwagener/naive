@@ -72,11 +72,32 @@ body
   width: 130px
   z-index: 500
 
-.text
+.message
   position: absolute
-  top: -20px
-  left: 100px
   color: #f06
   font-weight: bold
   text-shadow: 0 0 2px black
   width: 300px
+  z-index: 1000
+
+.shadow
+  margin-left: 30px
+  width: 80px
+  height: 50px
+  border-radius: 50px
+  background-image: -moz-radial-gradient(circle contain, #999, transparent)
+  background-image: -webkit-gradient(radial, center center, 0, center center, 150, from(#999), to(transparent))
+  -webkit-transform: translateY(-75px) scale(1, 0.2)
+  -moz-transform: translateY(-75px) scale(1, 0.2) 
+  -ms-transform: translateY(-75px) scale(1, 0.2)
+  -o-transform: translateY(-75px) scale(1, 0.2)  
+  position: absolute
+  bottom: -100px
+  z-index: -1
+
+
+.stan-waiting-2
+  @include stan-sprite(waiting-1)
+
+.stan-waiting-3
+  @include stan-sprite(waiting-0)

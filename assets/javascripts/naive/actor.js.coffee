@@ -16,7 +16,6 @@ class NAIVE.Actor
       if @position.distanceTo(@target) < @velocity
         @position = @target
         @target = null
-
         if @onTargetArrived?
           callback = @onTargetArrived
           @onTargetArrived = null
@@ -58,26 +57,28 @@ class NAIVE.Actor
         @setTarget point, callback
       else
         walkPath = (path, i) =>
-          console.log "walkPath segment", i, path
           if connection = path[i]
             @setTarget connection.point, =>
-              console.log "walkPath segment point reached", connection.walkArea
-              connection.walkArea.onEntry(@)
               walkPath path, i + 1
+              connection.walkArea.onEntry(@)
           else
-            console.log "Going to the original destination"
             @setTarget point, callback
         walkPath(path, 0)
 
     else
       @say "No way I can get there"
 
+  goCloseTo: (p, callback) ->
+    closestPoint = game.findClosestPointInWalkingAreaForPoint(p)
+    @goTo(closestPoint, callback)
+
+  stop: ->
+    @target = null
+    @onTargetArrived = null
+
   say: (message, callback) ->
-    @e.find(".text").text(message)
-    window.setTimeout (=>
-      @e.find(".text").text('')
-      callback() if callback?
-    ), 2000
+    textPosition = new NAIVE.P @position.x + @width / 2, @position.y - @height - 35
+    game.showMessage(textPosition, message, "#f06", callback)
 
   constructor: ->
     @e = $(".actor")
@@ -100,7 +101,7 @@ class NAIVE.Actor
         animationFrames = 6
     else
       animation = "stan-waiting"
-      animationFrames = 2
+      animationFrames = 4
 
     toBeRemoved = []
     toBeAdded   = []
@@ -110,5 +111,4 @@ class NAIVE.Actor
         toBeAdded.push animationFrameName
       else
         toBeRemoved.push animationFrameName
-    #@e.removeClass(toBeRemoved.join(" ")).addClass(toBeAdded.join(" "))
     @e.attr("class", "actor #{toBeAdded[0]}")

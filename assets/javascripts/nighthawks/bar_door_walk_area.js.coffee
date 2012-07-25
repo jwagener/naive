@@ -11,3 +11,4 @@ class Nighthawks.BarDoorWalkArea extends NAIVE.WalkArea
     new NAIVE.P(1100, 600)
     new NAIVE.P(1045, 500)
   ]
+

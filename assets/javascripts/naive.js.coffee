@@ -10,7 +10,8 @@ class NAIVE.Game
     @$e = $(".canvas")
     @actor = new NAIVE.Actor()
     @actor.position = new NAIVE.P(-150, 550)
-    @walkAreas = options.walkAreas
+    @walkAreas = options.walkAreas || []
+    @itemAreas = options.itemAreas || []
     document.title = @title
     @$e.find(".click-layer").bind "click", @onClick
     @initializeDebug()
@@ -28,21 +29,18 @@ class NAIVE.Game
   onClick: (e) =>
     e.preventDefault()
     p = new NAIVE.P(e.offsetX, e.offsetY)
-    console.log p.toString(), e
 
     if area = @findAreaForPoint(p)
-      @actor.goTo(p)
-      #area.onClick(p, @game, @actor)
+      area.onClick(p, @, @actor)
     else
-      closestPoint = @findClosestPointInWalkingAreaForPoint(p)
-      @actor.goTo(closestPoint)
+      @actor.goCloseTo(p)
 
   findAreaForPoint: (point) ->
     foundArea = null
-    for areaCollection in [@walkAreas]
+    for areaCollection in [@itemAreas, @walkAreas]
       for area in areaCollection
         if area.polygon.isPointWithin(point)
-          foundArea = area
+          return foundArea = area
     foundArea
 
   findClosestPointInWalkingAreaForPoint: (point) ->
@@ -52,6 +50,19 @@ class NAIVE.Game
         if area.polygon.isPointWithin(currentPoint)
           return currentPoint
     null
+
+  showMessage: (point, message, color, callback) ->
+    $message = $("<span class='message' />").text(message).css
+      top: point.y
+      left: point.x
+      color: color
+
+    $message.appendTo(@$e)
+
+    window.setTimeout (->
+      $message.remove()
+      callback() if callback?
+    ), 2000
 
   initializeDebug: ->
     @debugCanvas = @setupDebugCanvas()
@@ -64,6 +75,6 @@ class NAIVE.Game
     window.ctx = c[0].getContext("2d")
 
   debugAreas: ->
-    for area in @walkAreas
-      console.log(area)
-      area.polygon.toCanvas(@debugCanvas)
+    for areaCollection in [@itemAreas, @walkAreas]
+      for area in areaCollection
+        area.polygon.toCanvas(@debugCanvas)
