@@ -1,7 +1,8 @@
 window.sleepingManItemArea = new NAIVE.ItemArea
   points: [
     new NAIVE.P(567, 411)
-    new NAIVE.P(605, 296)
+    new NAIVE.P(583, 300)
+    new NAIVE.P(624, 300)
     new NAIVE.P(637, 409)
   ]
 

@@ -1,8 +1,8 @@
 window.womenItemArea = new NAIVE.ItemArea
   points: [
     new NAIVE.P(807, 366)
-    new NAIVE.P(823, 298)
-    new NAIVE.P(836, 297)
+    new NAIVE.P(824, 292)
+    new NAIVE.P(845, 293)
     new NAIVE.P(844, 363)
   ]
 
