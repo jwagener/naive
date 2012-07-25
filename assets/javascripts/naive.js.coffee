@@ -8,6 +8,9 @@ class NAIVE.Game
   frame: 0
   constructor: (options) ->
     @$e = $(".canvas")
+    $(window).on "resize", =>
+      @canvasPosition = @$e[0].getBoundingClientRect()
+    $(window).resize()
     @actor = new NAIVE.Actor()
     @actor.position = new NAIVE.P(-150, 550)
     @walkAreas = options.walkAreas || []
@@ -28,8 +31,8 @@ class NAIVE.Game
 
   onClick: (e) =>
     e.preventDefault()
-    p = new NAIVE.P(e.offsetX, e.offsetY)
-    console.log p.toString()
+    p = new NAIVE.P(e.pageX - @canvasPosition.left, e.pageY - @canvasPosition.top)
+    console.log p.toString(), e
     if area = @findAreaForPoint(p)
       area.onClick(p, @, @actor)
     else
